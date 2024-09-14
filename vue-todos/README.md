@@ -4,6 +4,10 @@
 npm i --save-dev uid sass @iconify/vue
 ```
 
+```
+npm i uid
+```
+
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
