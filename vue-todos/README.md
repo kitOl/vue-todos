@@ -1,5 +1,7 @@
 # vue-todos
 
+Created by [Crash Course John Komarnicki](https://youtu.be/KTFH4P8unUQ)
+
 ```
 npm i --save-dev uid sass @iconify/vue
 ```
