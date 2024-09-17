@@ -7,6 +7,19 @@ import TodoItem from '../components/TodoItem.vue';
 
 const todoList = ref([]);
 
+const fetchTodoList = () => {
+  const savedTodoList = JSON.parse(localStorage.getItem('todoList'));
+  if (savedTodoList) {
+    todoList.value = savedTodoList;
+  }
+};
+
+fetchTodoList();
+
+const setTodoListLocalStorage = () => {
+  localStorage.setItem('todoList', JSON.stringify(todoList.value));
+};
+
 const createTodo = (todo) => {
   todoList.value.push({
     id: uid(),
@@ -14,18 +27,27 @@ const createTodo = (todo) => {
     isCompleted: null,
     isEditing: null,
   });
+  setTodoListLocalStorage();
 };
 
 const toggleTodoComplete = (todoPos) => {
   todoList.value[todoPos].isCompleted = !todoList.value[todoPos].isCompleted;
+  setTodoListLocalStorage();
 };
 
 const toggleEditTodo = (todoPos) => {
   todoList.value[todoPos].isEditing = !todoList.value[todoPos].isEditing;
+  setTodoListLocalStorage();
 };
 
 const updateTodo = (todoVal, todoPos) => {
   todoList.value[todoPos].todo = todoVal;
+  setTodoListLocalStorage();
+};
+
+const deleteTodo = (todoId) => {
+  todoList.value = todoList.value.filter((todo) => todo.id !== todoId);
+  setTodoListLocalStorage();
 };
 </script>
 
@@ -42,6 +64,7 @@ const updateTodo = (todoVal, todoPos) => {
         @toggle-complete="toggleTodoComplete"
         @edit-todo="toggleEditTodo"
         @update-todo="updateTodo"
+        @delete-todo="deleteTodo"
       />
     </ul>
     <p v-else class="todos-msg">
